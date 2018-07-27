@@ -1,11 +1,11 @@
 function myFunction() {
-    var x = document.getElementById("frm1");
+    var x = document.getElementById("numbers");
     var text = "";
     var i;
     for (i = 0; i < x.length ;i++) {
         text += x.elements[i].value + " ";
     }
-    document.getElementById("demo").innerHTML = text;
+    document.getElementById("lucky").innerHTML = text;
 }
 
 function random(){
@@ -17,7 +17,9 @@ function random(){
 
     var winner = Math.floor(Math.random() * 101)
 
-    var win = (first +" "+ second +" "+ third +" "+ fourth +" "+ winner)
+    var win = (first +","+ second +","+ third +","+ fourth +","+ winner)
+
+       
     
     document.getElementById('ranNum').value = win
     document.getElementById('numbers').innerHTML = win
@@ -25,62 +27,6 @@ function random(){
 
   }
   
-  // Create a Stripe client.
-var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
 
-// Create an instance of Elements.
-var elements = stripe.elements();
-
-// Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
-var style = {
-  base: {
-    color: '#32325d',
-    lineHeight: '18px',
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    fontSmoothing: 'antialiased',
-    fontSize: '16px',
-    '::placeholder': {
-      color: '#aab7c4'
-    }
-  },
-  invalid: {
-    color: '#fa755a',
-    iconColor: '#fa755a'
-  }
-};
-
-// Create an instance of the card Element.
-var card = elements.create('card', {style: style});
-
-// Add an instance of the card Element into the `card-element` <div>.
-card.mount('#card-element');
-
-// Handle real-time validation errors from the card Element.
-card.addEventListener('change', function(event) {
-  var displayError = document.getElementById('card-errors');
-  if (event.error) {
-    displayError.textContent = event.error.message;
-  } else {
-    displayError.textContent = '';
-  }
-});
-
-// Handle form submission.
-var form = document.getElementById('payment-form');
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  stripe.createToken(card).then(function(result) {
-    if (result.error) {
-      // Inform the user if there was an error.
-      var errorElement = document.getElementById('card-errors');
-      errorElement.textContent = result.error.message;
-    } else {
-      // Send the token to your server.
-      stripeTokenHandler(result.token);
-    }
-  });
-});
 
 
